@@ -32,8 +32,7 @@
 |`/login`               |LoginPage	        |anon only <AnonRoute>   |Login form, link to signup, navigate to launcher after login           |         
 |`/profile/:id`         |ProfilePage        |user only <PrivateRoute>|Shows all user's profile details in a form                             | 
 |`/profile/edit/:id`    |EditProfilePage    |user only <PrivateRoute>|Allows to edits profile details                                        |
-|`/friends`             |FriendsPage        |user only <PrivateRoute>|View current user's friends                                            |  
-|`/seach-friends-result`|SearchFriendsPage  |user only <PrivateRoute>|Allows user to search new friends                                      |
+|`/friends`             |FriendsPage        |user only <PrivateRoute>|View current user's friends and allows to search new ones              |  
 |`/filter-results`      |SearchFriendsPage  |user only <PrivateRoute>|List of the filtered results that users request                        |
 |`/store-details`       |StoreDetailsPage   |user only <PrivateRoute>|Shows store details and the product catalog so that the user can select|
 
@@ -43,8 +42,6 @@
   - auth.login(user)
   - auth.signup(user)
   - auth.logout()
-  
-
   
 ## Server / Backend
   
