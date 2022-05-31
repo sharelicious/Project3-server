@@ -67,8 +67,8 @@ Users model
 username: {type: String, required: true, unique: true},
 email: {type: String, required: true, unique: true},
 password: {type: String, required: true},
-savedStores: [Stores],
-orderHistory: [Orders]
+savedStores: [{type: Schema.Types.ObjectId,ref:'Stores'}],
+orderHistory: [{type: Schema.Types.ObjectId,ref:'Orders'}],
 friends: [{type: Schema.Types.ObjectId,ref:'Users'}]
 }
 ```
@@ -103,7 +103,8 @@ Orders model
 
 ```javascript
 {
-orderedProducts: [Products]
+orderedProducts: [{type: Schema.Types.ObjectId,ref:'Products'}]
+orderedStores: [{type: Schema.Types.ObjectId,ref:'Stores'}]
 }
 ``` 
 
