@@ -2,9 +2,6 @@
 
 # sharelicious: order food, meet people
 
-
-Link: INSERT LINK TO THE PROJECT DEPLOYED TO NETLIFY HERE
-
 ## Description
 
 **sharelicious** is an online food delivery app that, in addition to offering the experience of ordering products, allows users to interact by viewing their profiles, obtain recommendations based on their latest orders, and follow each other.
@@ -128,7 +125,7 @@ orderedStores: [{type: Schema.Types.ObjectId,ref:'Stores'}]
 
 [Repository Link](https://github.com/sharelicious/sharelicious)
 
-[Deploy Link]() INSERT LINK TO THE PROJECT DEPLOYED TO NETLIFY HERE
+[Deploy Link](https://sharelicious.herokuapp.com/)
 
 ### Slides
 
