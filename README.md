@@ -57,9 +57,10 @@ Users model
 username: {type: String, required: true, unique: true},
 email: {type: String, required: true, unique: true},
 password: {type: String, required: true},
-savedStores: [{type: Schema.Types.ObjectId,ref:'Stores'}],
-orderHistory: [{type: Schema.Types.ObjectId,ref:'Orders'}],
-friends: [{type: Schema.Types.ObjectId,ref:'Users'}]
+favoritesStores: [{type: Schema.Types.ObjectId,ref:'Stores'}],
+friends: [{type: Schema.Types.ObjectId,ref:'Users'}],
+tagLine: {type: String}
+comments: [{type: Schema.Types.ObjectId,ref:'Comments'}]
 }
 ```
 
@@ -69,7 +70,7 @@ Stores model
 {
 storeName: {type: String, required: true},
 address: {type: String, required: true, unique: true},
-phoneNumber: {type: String, required: true},
+storePhone: {type: String, required: true},
 storeImg: {type: String},
 deliveryTime: [{type: String}],
 priceRange: [{type: String}],
@@ -85,16 +86,15 @@ Products model
 productName: {type: String, required: true},
 productImg: {type: String},
 productDescription: {type: String, required: true},
-productPrice: {type: String, required: true},
 }
 ```  
   
-Orders model
+Comments model
 
 ```javascript
 {
-orderedProducts: [{type: Schema.Types.ObjectId,ref:'Products'}]
-orderedStores: [{type: Schema.Types.ObjectId,ref:'Stores'}]
+message: {type: String, required: true},
+owner: [{type: Schema.Types.ObjectId,ref:'Users'}]
 }
 ``` 
 
@@ -102,10 +102,10 @@ orderedStores: [{type: Schema.Types.ObjectId,ref:'Stores'}]
 
 | HTTP Method |               URL           |         Request Body         | Success status | Error Status |             Description                   |
 |-------------|-----------------------------|------------------------------|----------------|--------------|-------------------------------------------|
-|GET          |`/auth/profile`              |Saved session                 |200             |404           |Check if user is logged in and return profile page  | 
+|GET          |`/auth/profile`              |Saved session                 |200             |404           |Check if user is logged in and return profile page| 
 |POST         |`/auth/signup`               | {name, email, password}      |201             |404           |Checks if fields not empty (422) and user not exists (409), then create user with encrypted password, and store user in session|
-|POST         |`/auth/login`                | {username, password}         | 200            | 401          | Checks if fields not empty (422), if user exists (404), and if password matches (404), then stores user in session |
-| POST        | `/auth/logout`                | (empty)                      | 204            | 400          | Logs out the user                         
+|POST         |`/auth/login`                | {username, password}         |200             |401           |Checks if fields not empty (422), if user exists (404), and if password matches (404), then stores user in session|
+|POST         |`/auth/logout`               |(empty)                       |204             |400           |Logs out the user                         
   
   
 ## Links
@@ -122,7 +122,7 @@ orderedStores: [{type: Schema.Types.ObjectId,ref:'Stores'}]
 
 ### Slides
 
-[Link]() INSERT LINK TO THE SLIDES HERE
+[Link](https://slides.com/pablodellacassa/sharelicious/) 
 
 ### Contributors
 
