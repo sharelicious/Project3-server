@@ -15,7 +15,6 @@ router.get("/getOneStore/:store_id", (req, res) => {
 
   const { store_id } = req.params
 
-  const marco = 10;
 
   Store
     .findById(store_id)
