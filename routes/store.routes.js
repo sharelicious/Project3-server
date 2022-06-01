@@ -1,40 +1,41 @@
 const router = require("express").Router()
 
 const { isAuthenticated } = require("../middlewares/jwt.middleware")
-const Coaster = require('./../models/Coaster.model')
+const Store = require('./../models/Store.model')
 
-router.get("/getAllCoasters", (req, res) => {
+router.get("/getAllStores", (req, res) => {
 
-  Coaster
+  Store
     .find()
     .then(response => res.json(response))
     .catch(err => res.status(500).json(err))
 })
 
-router.get("/getOneCoaster/:coaster_id", (req, res) => {
+router.get("/getOneStore/:store_id", (req, res) => {
 
-  const { coaster_id } = req.params
+  const { store_id } = req.params
 
-  Coaster
-    .findById(coaster_id)
+
+  Store
+    .findById(store_id)
     .then(response => res.json(response))
     .catch(err => res.status(500).json(err))
 })
 
 
-router.post("/saveCoaster", isAuthenticated, (req, res) => {
+/* router.post("/saveStore", isAuthenticated, (req, res) => {
 
-  const { title, description, imageUrl, inversions, length } = req.body
+  const { storeName, address, storePhone, deliveryTime, priceRange } = req.body
 
   const owner = req.payload._id
 
   console.log('El payload del objeto request nos da en las rutas protegidas el ID logueado:', owner)
 
-  Coaster
+  Store
     .create({ title, description, imageUrl, inversions, length, owner })
     .then(response => res.json(response))
     .catch(err => res.status(500).json(err))
-})
+}) */
 
 
 
