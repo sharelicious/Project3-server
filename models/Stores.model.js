@@ -37,12 +37,6 @@ const storeSchema = new Schema({
       type: Schema.Types.ObjectId,
        ref: "Comments"
     },
-  ],
-  owner: [
-    {
-      type: Schema.Types.ObjectId, 
-      ref: "User"
-    }
   ]
 });
 
