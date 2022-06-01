@@ -1,11 +1,12 @@
 const router = require("express").Router();
 const Store = require("../models/Store.model");
 const Product = require("../models/Product.model");
-const Comment = require("../models/Comment.model");
+const Comment = require("../models/Comments.model");
 const User = require("../models/User.model");
 const mongoose = require("mongoose");
 const { isAuthenticated } = require("../middlewares/jwt.middleware");
 
+//all favourite stores
 router.get("/getAll", (req, res, next) => {
   const allCuisines = Product.find();
   const allFavoritesStores = User.find();
@@ -17,6 +18,8 @@ router.get("/getAll", (req, res, next) => {
     .catch((err) => res.status(500).json(err));
 });
 
+//filtered cuisines 
+
 router.get("/filter/:cuisine", (req, res) => {
   const { cuisineType } = req.params;
 
@@ -27,6 +30,7 @@ router.get("/filter/:cuisine", (req, res) => {
     .catch((err) => res.status(500).json(err));
 });
 
+//filtered stores: "/store-details/:id"
 router.get("/filter/:store", (req, res, next) => {
   const { favoriteStores } = req.params;
 
