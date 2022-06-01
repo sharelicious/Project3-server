@@ -17,7 +17,7 @@ const userSchema = new Schema({
     required: [true, "username is mandatory"],
     unique: true,
   },
-  favoritesStores: [
+  favoriteStores: [
     {
       type: Schema.Types.ObjectId,
       ref: "Stores",
@@ -41,6 +41,11 @@ const userSchema = new Schema({
       ref: "Comments",
     },
   ],
+  userImg: {
+    type: String,
+    default:
+      "https://simulacionymedicina.es/wp-content/uploads/2015/11/default-avatar-300x300-1.jpg",
+  },
 });
 
 module.exports = model("User", userSchema);

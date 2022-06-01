@@ -14,6 +14,30 @@ const productSchema = new Schema({
     type: String,
     required: true,
   },
+  cuisineType: {
+    type: String,
+    required: true,
+    enum: [
+      "Pizza",
+      "Sushi",
+      "Thai",
+      "Chinese",
+      "Ramen",
+      "Soup",
+      "Italian",
+      "Vegan",
+      "Healthy",
+      "Indian",
+      "Burgers",
+      "Breakfast",
+      "Salad",
+      "Mexican",
+      "Vegetarian",
+      "Sandwiches",
+      "Mediterranean",
+      "Korean",
+    ],
+  },
 });
 
 const Product = model("Product", productSchema);
