@@ -32,6 +32,7 @@ const userSchema = new Schema({
   tagLine: [
     {
       type: String,
+      maxlength: 280,
     },
   ],
   comments: [

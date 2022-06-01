@@ -26,15 +26,24 @@ const storeSchema = new Schema({
     type: String,
     enum: ["$", "$$", "$$$"],
   },
-  isUnder30Min: {
-    type: Boolean,
-  },
   products: [
     {
       type: Schema.Types.ObjectId,
       ref: "Products",
     },
   ],
+  comments: [
+    {
+      type: Schema.Types.ObjectId,
+       ref: "Comments"
+    },
+  ],
+  owner: [
+    {
+      type: Schema.Types.ObjectId, 
+      ref: "User"
+    }
+  ]
 });
 
 const Store = model("Store", storeSchema);
