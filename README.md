@@ -69,9 +69,9 @@ Stores model
 storeName: {type: String, required: true},
 address: {type: String, required: true, unique: true},
 storePhone: {type: String, required: true},
-storeImg: {type: String, default: "https://easterntradelinks.com/front/images/default.png"},
-deliveryTime: [{type: String}],
-priceRange: [{type: String}],
+storeImg: {type: String},
+deliveryTime: {type: String, enum: ["15 min", "15-30 min", "30-45 min"]},
+priceRange: {type: String, enum: ["$", "$$", "$$$"]},
 isUnder30Min: {type: Boolean},
 products: [{type: Schema.Types.ObjectId,ref:'Products'}]
 }
@@ -84,6 +84,7 @@ Products model
 productName: {type: String, required: true},
 productImg: {type: String},
 productDescription: {type: String, required: true},
+cuisineType: {type: String, required: true, enum: ["Pizza", "Sushi", "Thai", "Chinese", "Ramen", "Soup", "Italian", "Vegan", "Healthy", "Indian", "Burgers", "Breakfast", "Salad","Mexican", "Vegetarian", "Sandwiches", "Mediterranean", "Korean"]}  
 }
 ```  
   
@@ -131,6 +132,3 @@ Pablo Dellacassa - [`<github>`](https://github.com/pablodellacassa) - [`<linkedi
 Luisa Ojeda - [`<github>`](https://github.com/LuisaEOjeda) - [`<linkedin>`](https://www.linkedin.com/in/luisaojeda/) 
 
 Bjork Weenk - [`<github>`](https://github.com/bjorkweenk) - [`<linkedin>`](https://www.linkedin.com/in/wuqingguibjork/)  
-
-
-  
