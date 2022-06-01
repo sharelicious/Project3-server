@@ -17,6 +17,7 @@ const storeSchema = new Schema({
   storeImg: {
     type: String,
     required: true,
+    default: "https://easterntradelinks.com/front/images/default.png",
   },
   deliveryTime: {
     type: String,
@@ -35,9 +36,9 @@ const storeSchema = new Schema({
   comments: [
     {
       type: Schema.Types.ObjectId,
-       ref: "Comments"
+      ref: "Comments",
     },
-  ]
+  ],
 });
 
 const Store = model("Store", storeSchema);
