@@ -56,8 +56,9 @@ email: {type: String, required: true, unique: true},
 password: {type: String, required: true},
 favoritesStores: [{type: Schema.Types.ObjectId,ref:'Stores'}],
 friends: [{type: Schema.Types.ObjectId,ref:'Users'}],
-tagLine: {type: String}
-comments: [{type: Schema.Types.ObjectId,ref:'Comments'}]
+tagLine: {type: String},
+comments: [{type: Schema.Types.ObjectId,ref:'Comments'}],
+userImg: {type: String, default: "https://simulacionymedicina.es/wp-content/uploads/2015/11/default-avatar-300x300-1.jpg"}
 }
 ```
 
@@ -68,7 +69,7 @@ Stores model
 storeName: {type: String, required: true},
 address: {type: String, required: true, unique: true},
 storePhone: {type: String, required: true},
-storeImg: {type: String},
+storeImg: {type: String, default: "https://easterntradelinks.com/front/images/default.png"},
 deliveryTime: [{type: String}],
 priceRange: [{type: String}],
 isUnder30Min: {type: Boolean},
