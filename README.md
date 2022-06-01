@@ -56,8 +56,9 @@ email: {type: String, required: true, unique: true},
 password: {type: String, required: true},
 favoritesStores: [{type: Schema.Types.ObjectId,ref:'Stores'}],
 friends: [{type: Schema.Types.ObjectId,ref:'Users'}],
-tagLine: {type: String}
-comments: [{type: Schema.Types.ObjectId,ref:'Comments'}]
+tagLine: {type: String},
+comments: [{type: Schema.Types.ObjectId,ref:'Comments'}],
+userImg: {type: String, default: "https://simulacionymedicina.es/wp-content/uploads/2015/11/default-avatar-300x300-1.jpg"}
 }
 ```
 
@@ -69,8 +70,8 @@ storeName: {type: String, required: true},
 address: {type: String, required: true, unique: true},
 storePhone: {type: String, required: true},
 storeImg: {type: String},
-deliveryTime: [{type: String}],
-priceRange: [{type: String}],
+deliveryTime: {type: String, enum: ["15 min", "15-30 min", "30-45 min"]},
+priceRange: {type: String, enum: ["$", "$$", "$$$"]},
 isUnder30Min: {type: Boolean},
 products: [{type: Schema.Types.ObjectId,ref:'Products'}]
 }
@@ -83,6 +84,7 @@ Products model
 productName: {type: String, required: true},
 productImg: {type: String},
 productDescription: {type: String, required: true},
+cuisineType: {type: String, required: true, enum: ["Pizza", "Sushi", "Thai", "Chinese", "Ramen", "Soup", "Italian", "Vegan", "Healthy", "Indian", "Burgers", "Breakfast", "Salad","Mexican", "Vegetarian", "Sandwiches", "Mediterranean", "Korean"]}  
 }
 ```  
   
@@ -130,6 +132,3 @@ Pablo Dellacassa - [`<github>`](https://github.com/pablodellacassa) - [`<linkedi
 Luisa Ojeda - [`<github>`](https://github.com/LuisaEOjeda) - [`<linkedin>`](https://www.linkedin.com/in/luisaojeda/) 
 
 Bjork Weenk - [`<github>`](https://github.com/bjorkweenk) - [`<linkedin>`](https://www.linkedin.com/in/wuqingguibjork/)  
-
-
-  
