@@ -9,7 +9,8 @@ const users = [
     email: "luisa@sharelicious.com",
     tagLine: "Klaussieeee",
     comments: [],
-    userImg: undefined
+    userImg: undefined,
+    
   },
   {
     username: "Bjork",
