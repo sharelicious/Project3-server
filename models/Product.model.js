@@ -38,6 +38,10 @@ const productSchema = new Schema({
       "Korean",
     ],
   },
+  productPrice: {
+    type: String,
+    required: true,
+  },
 });
 
 const Product = model("Product", productSchema);
