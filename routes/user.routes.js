@@ -31,15 +31,30 @@ router.get("/search/user", isAuthenticated, (req, res) => {
 router.get("/user/follow/:friendId", isAuthenticated, (req, res) => {
   User.findById(req.payload._id)
     .then((loggedInUser) => {
-      loggedInUser.friends.push([req.params.friendId]);
+      loggedInUser.friends.push(req.params.friendId);
       loggedInUser
         .save() //db
         .then((loggedInUser) => res.json(loggedInUser.friends));
     })
     .catch((err) => {
-      console.log("Unable to find friends", err);
+      console.log("UnablerequestProperty: 'payload' to find friends", err);
       res.redirect("/friends");
     });
 });
 
+router.get("/user/unfollow/:friendId", isAuthenticated, (req, res) => {
+    User.findById(req.payload._id)
+      .then((loggedInUser) => {
+        const friendIndex = loggedInUser.friends.indexOf(req.params.friendId)
+        loggedInUser.friends.splice(friendIndex, 1);
+        loggedInUser
+          .save() //db
+          .then((loggedInUser) => res.json(loggedInUser.friends));
+      })
+      .catch((err) => {
+        console.log("Unable to find friends", err);
+        res.redirect("/friends");
+      });
+  });
+  
 module.exports = router;
