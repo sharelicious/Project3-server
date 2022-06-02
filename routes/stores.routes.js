@@ -6,21 +6,30 @@ const User = require("../models/User.model");
 const mongoose = require("mongoose");
 const { isAuthenticated } = require("../middlewares/jwt.middleware");
 
-//all favourite stores
-router.get("/getAll", (req, res, next) => {
+router.get("/getAllCuisines", isAuthenticated, (req, res, next) => {
   const allCuisines = Product.find();
-  const allFavoritesStores = User.find();
 
-  Promise.all([allCuisines, allFavoritesStores])
-    .then(([cuisines, favoritesStores]) => {
-      res.json(filteredStores(cuisines, favoritesStores));
+  Promise.all([allCuisines])
+    .then(([cuisines]) => {
+      res.json(filteredStores(cuisines));
+    })
+    .catch((err) => res.status(500).json(err));
+});
+
+router.get("/getAllFavoriteStores", isAuthenticated, (req, res, next) => {
+  const allStores = Store.find();
+  const allFavoritesStores = User.find();
+  
+
+  Promise.all([allStores, allFavoritesStores])
+    .then(([stores, favoritesStores]) => {
+      res.json(filteredStores(stores, favoritesStores));
     })
     .catch((err) => res.status(500).json(err));
 });
 
 
-//filtered cuisines 
-router.get("/filter/:cuisine", (req, res) => {
+router.get("/filter/:cuisine", isAuthenticated, (req, res) => {
   const { cuisineType } = req.params;
 
   Product.find({ cuisineType })
@@ -30,9 +39,7 @@ router.get("/filter/:cuisine", (req, res) => {
     .catch((err) => res.status(500).json(err));
 });
 
-
-//filtered stores
-router.get("/filter/:store", (req, res, next) => {
+router.get("/filter/:store", isAuthenticated, (req, res, next) => {
   const { favoriteStores } = req.params;
 
   Product.find({ cuisineType })
@@ -41,6 +48,16 @@ router.get("/filter/:store", (req, res, next) => {
     })
     .catch((err) => res.status(500).json(err));
 });
+
+router.get('/getStoreById/:id', (req, res, next) => {
+
+  const { id } = req.params
+
+  Store
+      .find({ storeName: id })
+      .then(stores => res.json(stores))
+      .catch(err => res.status(500).json(err))
+})
 
 
 
