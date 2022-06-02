@@ -18,8 +18,8 @@ router.get("/getAll", (req, res, next) => {
     .catch((err) => res.status(500).json(err));
 });
 
-//filtered cuisines 
 
+//filtered cuisines 
 router.get("/filter/:cuisine", (req, res) => {
   const { cuisineType } = req.params;
 
@@ -30,7 +30,8 @@ router.get("/filter/:cuisine", (req, res) => {
     .catch((err) => res.status(500).json(err));
 });
 
-//filtered stores: "/store-details/:id"
+
+//filtered stores
 router.get("/filter/:store", (req, res, next) => {
   const { favoriteStores } = req.params;
 
