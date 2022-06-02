@@ -47,7 +47,7 @@
   
 ### Models
   
-Users model
+User model
   
 ```javascript
 {
@@ -62,33 +62,35 @@ userImg: {type: String, default: "https://simulacionymedicina.es/wp-content/uplo
 }
 ```
 
-Stores model
+Store model
 
 ```javascript
 {
 storeName: {type: String, required: true},
-address: {type: String, required: true, unique: true},
+storeAddress: {type: String, required: true, unique: true},
 storePhone: {type: String, required: true},
 storeImg: {type: String},
 deliveryTime: {type: String, enum: ["15 min", "15-30 min", "30-45 min"]},
 priceRange: {type: String, enum: ["$", "$$", "$$$"]},
-isUnder30Min: {type: Boolean},
-products: [{type: Schema.Types.ObjectId,ref:'Products'}]
+products: [{type: Schema.Types.ObjectId,ref:'Products'}],
+cuisineType: {type: String, required: true, enum: ["Pizza", "Sushi", "Thai", "Chinese", "Ramen", "Soup", "Italian", "Vegan", "Healthy", "Indian", "Burgers", "Breakfast", "Salad","Mexican", "Vegetarian", "Sandwiches", "Mediterranean", "Korean"]},
+comments: [{type: Schema.Types.ObjectId,ref:'Comments'}]
 }
 ```
   
-Products model
+Product model
 
 ```javascript
 {
 productName: {type: String, required: true},
 productImg: {type: String},
 productDescription: {type: String, required: true},
-cuisineType: {type: String, required: true, enum: ["Pizza", "Sushi", "Thai", "Chinese", "Ramen", "Soup", "Italian", "Vegan", "Healthy", "Indian", "Burgers", "Breakfast", "Salad","Mexican", "Vegetarian", "Sandwiches", "Mediterranean", "Korean"]}  
+cuisineType: {type: String, required: true, enum: ["Pizza", "Sushi", "Thai", "Chinese", "Ramen", "Soup", "Italian", "Vegan", "Healthy", "Indian", "Burgers", "Breakfast", "Salad","Mexican", "Vegetarian", "Sandwiches", "Mediterranean", "Korean"]},
+productPrice: {type: String, required: true}
 }
 ```  
   
-Comments model
+Comment model
 
 ```javascript
 {
