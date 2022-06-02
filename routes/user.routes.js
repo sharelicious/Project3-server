@@ -28,7 +28,7 @@ router.get("/search/user", isAuthenticated, (req, res) => {
 });
 
 //following friends
-router.get("/user/follow/:friendId", (req, res) => {
+router.get("/user/follow/:friendId", isAuthenticated, (req, res) => {
   User.findById(req.payload._id)
   .then((loggedInUser)=>{
     loggedInUser.friends.push([req.params.friendId])
