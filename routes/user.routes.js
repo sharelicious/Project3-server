@@ -20,7 +20,7 @@ router.get("/user/friends", isAuthenticated, (req, res) => {
 router.get("/search/user", isAuthenticated, (req, res) => {
   const allFriends = User.findById();
   Promise.all([allFriends])
-   .populate("friends")
+    .populate("friends")
     .then(([friends]) => {
       res.json(friends);
     })
@@ -30,11 +30,12 @@ router.get("/search/user", isAuthenticated, (req, res) => {
 //following friends
 router.get("/user/follow/:friendId", isAuthenticated, (req, res) => {
   User.findById(req.payload._id)
-  .then((loggedInUser)=>{
-    loggedInUser.friends.push([req.params.friendId])
-    loggedInUser.save() //db
-    .then((loggedInUser)=> res.json(loggedInUser.friends))
-  })
+    .then((loggedInUser) => {
+      loggedInUser.friends.push([req.params.friendId]);
+      loggedInUser
+        .save() //db
+        .then((loggedInUser) => res.json(loggedInUser.friends));
+    })
     .catch((err) => {
       console.log("Unable to find friends", err);
       res.redirect("/friends");
