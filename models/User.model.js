@@ -44,7 +44,7 @@ const userSchema = new Schema({
   userImg: {
     type: String,
     default:
-      "https://simulacionymedicina.es/wp-content/uploads/2015/11/default-avatar-300x300-1.jpg",
+      "https://i.ibb.co/hDK8Qvr/default-avatar-300x300-1.jpg",
   },
 });
 
