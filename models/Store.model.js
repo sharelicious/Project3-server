@@ -1,4 +1,5 @@
-const { Schema, model } = require("mongoose");
+const mongoose = require("mongoose");
+const { Schema, model } = mongoose;
 
 const storeSchema = new Schema({
   storeName: {
@@ -30,7 +31,7 @@ const storeSchema = new Schema({
   products: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Products",
+      ref: "Product",
     },
   ],
   cuisineType: {
@@ -60,7 +61,19 @@ const storeSchema = new Schema({
   comments: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Comments",
+      ref: "Comment",
+    },
+  ],
+  storeLikes: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
+  deliveryOptions: [
+    {
+      type: String,
+      enum: ["DoorDash", "Uber Eats", "Seamless", "GrubHub", "Postmates"],
     },
   ],
 });
