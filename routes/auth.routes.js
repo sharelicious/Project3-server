@@ -12,11 +12,12 @@ router.post('/signup', (req, res, next) => {
 
   const { email, password, username } = req.body
 
-  /*if (password.length < 6 || password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/)) {
+/*   if (password.length < 6 || password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/)) {
     res.status(400).json({ message: 'Password must contain at least 8 characters, 1 number and 1 uppercase' })
     return
-  }
-*/
+  } */
+
+
   User
     .findOne({ email })
     .then((foundUser) => {
@@ -86,7 +87,7 @@ router.post('/login', (req, res, next) => {
     })
 })
 
-
+  // no devuelve el token
 router.get('/verify', isAuthenticated, (req, res, next) => {
 
   setTimeout(() => {
