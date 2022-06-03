@@ -4,7 +4,7 @@ const router = require("express").Router();
 const User = require("../models/User.model");
 
 //Retrieve all friends
-router.get("/user/friends", isAuthenticated, (req, res) => {
+router.get("/user/friends", (req, res) => {
   User.findById(req.payload._id)
     .populate("friends")
     .then(user => res.json(user.friends))
@@ -12,7 +12,7 @@ router.get("/user/friends", isAuthenticated, (req, res) => {
 });
 
 //Retrieve all users
-router.get("/search/users", isAuthenticated, (req, res) => {
+router.get("/user/search/users", isAuthenticated, (req, res) => {
   User.find() 
     .populate("friends")
     .then((friends) => {
