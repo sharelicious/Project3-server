@@ -20,7 +20,7 @@ const userSchema = new Schema({
   favoriteStores: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Stores",
+      ref: "Store",
     },
   ],
   friends: [

@@ -17,6 +17,7 @@ router.post('/signup', (req, res, next) => {
     return
   } */
 
+
   User
     .findOne({ email })
     .then((foundUser) => {
