@@ -71,10 +71,10 @@ const storeSchema = new Schema({
     },
   ],
   deliveryOptions: [
-    { 
+    {
       type: String,
-      enum: ["Delivery", "Pickup"] 
-    }
+      enum: ["DoorDash", "Uber Eats", "Seamless", "GrubHub", "Postmates"],
+    },
   ],
 });
 
