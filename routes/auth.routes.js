@@ -86,7 +86,7 @@ router.post('/login', (req, res, next) => {
     })
 })
 
-
+  // no devuelve el token
 router.get('/verify', isAuthenticated, (req, res, next) => {
 
   setTimeout(() => {

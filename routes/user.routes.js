@@ -1,24 +1,21 @@
-const { isAuthenticated } = require("../middlewares/jwt.middleware");
+ const { isAuthenticated } = require("../middlewares/jwt.middleware");
 const mongoose = require("mongoose");
 const router = require("express").Router();
 const User = require("../models/User.model");
 
-//get all friends
+//Retrieve all friends
 router.get("/user/friends", isAuthenticated, (req, res) => {
-  const allFriends = User.findById(req.payload._id); //username.find()
-  Promise.all([allFriends])
-    .then(([friends]) => {
-      res.json(friends);
-    })
-    .catch((err) => res.status(500).json(err));
+  User.findById(req.payload._id)
+    .populate("friends")
+    .then(user => res.json(user.friends))
+    .catch(err => res.status(500).json(err));
 });
 
-//filtered friends
-router.get("/search/user", isAuthenticated, (req, res) => {
-  const allFriends = User.findById();
-  Promise.all([allFriends])
+//Retrieve all users
+router.get("/search/users", isAuthenticated, (req, res) => {
+  User.find() 
     .populate("friends")
-    .then(([friends]) => {
+    .then((friends) => {
       res.json(friends);
     })
     .catch((err) => res.status(500).json(err));
