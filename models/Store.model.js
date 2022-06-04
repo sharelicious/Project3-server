@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 
-const UberEats = 'Uber Eats';
-const UberEatsLink = UberEats.link("https://www.ubereats.com/es-en/") 
-const DoorDash = 'Door Dash';
-const DoorDashLink = DoorDash.link("https://www.doordash.com/")
-const Postmates = 'Postmates';
-const PostmatesLink= Postmates.link("https://www.postmates.com/")
+const UberEats = "Uber Eats";
+const UberEatsLink = UberEats.link("https://www.ubereats.com/es-en/");
+const DoorDash = "Door Dash";
+const DoorDashLink = DoorDash.link("https://www.doordash.com/");
+const Postmates = "Postmates";
+const PostmatesLink = Postmates.link("https://www.postmates.com/");
 
 const storeSchema = new Schema({
   storeName: {
@@ -80,11 +80,7 @@ const storeSchema = new Schema({
   deliveryOptions: [
     {
       type: String,
-      enum: [
-      UberEatsLink,
-      DoorDashLink,
-      PostmatesLink
-      ],
+      enum: [UberEatsLink, DoorDashLink, PostmatesLink],
     },
   ],
 });
