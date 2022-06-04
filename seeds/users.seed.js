@@ -10,7 +10,8 @@ const users = [
     tagLine: "Klaussieeee",
     comments: [],
     userImg: undefined,
-    
+    favoriteStores: [],
+    friends: [],
   },
   {
     username: "Bjork",
@@ -18,7 +19,9 @@ const users = [
     email: "bjork@sharelicious.com",
     tagLine: "Broggggmas",
     comments: [],
-    userImg: undefined
+    userImg: undefined,
+    favoriteStores: [],
+    friends: [],
   },
   {
     username: "Sammy",
@@ -26,7 +29,9 @@ const users = [
     email: "sammy@sharelicious.com",
     tagLine: "7000 pavos",
     comments: [],
-    userImg: undefined
+    userImg: undefined,
+    favoriteStores: [],
+    friends: [],
   },
   {
     username: "Aleix",
@@ -34,7 +39,9 @@ const users = [
     email: "aleix@sharelicious.com",
     tagLine: "What a fuck!",
     comments: [],
-    userImg: undefined
+    userImg: undefined,
+    favoriteStores: [],
+    friends: [],
   },
   {
     username: "Adrian",
@@ -42,7 +49,9 @@ const users = [
     email: "adrian@sharelicious.com",
     tagLine: "Tengo seeeeed",
     comments: [],
-    userImg: undefined
+    userImg: undefined,
+    favoriteStores: [],
+    friends: [],
   },
   {
     username: "Alberte",
@@ -50,7 +59,9 @@ const users = [
     email: "alberte@sharelicious.com",
     tagLine: "Mi dosis de azuuucar",
     comments: [],
-    userImg: undefined
+    userImg: undefined,
+    favoriteStores: [],
+    friends: [],
   },
   {
     username: "Klaus",
@@ -58,7 +69,9 @@ const users = [
     email: "klaus@sharelicious.com",
     tagLine: "Muy buuueno amigo!",
     comments: [],
-    userImg: undefined
+    userImg: undefined,
+    favoriteStores: [],
+    friends: [],
   },
   {
     username: "Corina",
@@ -66,7 +79,9 @@ const users = [
     email: "corina@sharelicious.com",
     tagLine: "We aren't in the same page",
     comments: [],
-    userImg: undefined
+    userImg: undefined,
+    favoriteStores: [],
+    friends: [],
   },
   {
     username: "Pablo",
@@ -74,7 +89,10 @@ const users = [
     email: "pablo@sharelicious.com",
     tagLine: "Asaaaado!",
     comments: [],
-    userImg: undefined
+    userImg: undefined,
+    favoriteStores: [],
+    friends: [],
+    
   },
   {
     username: "Marco",
@@ -82,7 +100,9 @@ const users = [
     email: "marco@sharelicious.com",
     tagLine: "Bravisssimo!",
     comments: [],
-    userImg: undefined
+    userImg: undefined,
+    favoriteStores: [],
+    friends: [],
   },
 
 ];
