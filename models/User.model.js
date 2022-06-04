@@ -32,13 +32,14 @@ const userSchema = new Schema({
   tagLine: [
     {
       type: String,
-      maxlength: 280,
+      maxlength: 100,
     },
   ],
   comments: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Comments",
+      ref: "Comment",
+      maxlength: 280,
     },
   ],
   userImg: {
