@@ -21,5 +21,13 @@ router
 
 // See all likes of the user 
 router
-.get 
+.get ("/:storeId/like/:userId", (req, res) => {
+    User.findById(req.payload._id)
+    .populate("favoriteStores")
+    .then((user) => {
+        const reverseLikes = user.favoriteStores.reverse();
+        res.status(200).json(reverseLikes)
+    })
+    .catch((err) => console.log(err))
+})
 
