@@ -9,7 +9,7 @@ router.use("/auth", require('./auth.routes'))
 router.use("/store", require('./stores.routes'))
 router.use("/", require('./user.routes'))
 router.use("/upload", require('./upload.routes'))
-router.use("/profile", require('./profile.routes'))
+router.use("/user", require('./profile.routes'))
 router.use("/like", require('./likes.routes'))
 
 
