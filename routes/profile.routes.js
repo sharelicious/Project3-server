@@ -1,13 +1,16 @@
-const router = require("./user.routes");
-const User = require('../models/User.model')
+const express = require("express");
+const router = express.Router();
+const User = require("../models/User.model");
+const { isAuthenticated } = require("../middlewares/jwt.middleware");
+const uploadCloud = require("../config/cloudinary.config"); // for editing profile picture
 
 // user profile
-router.get("/profile/:id", (req, res) => {
-  const { id } = req.params;
-  
-  User.findById(id)
+router.get("/profile/user/:id", isAuthenticated, (req, res) => {
+  const { _id } = req.params;
+
+  User.findById(_id)
     .then((user) => {
-      res.json(user)
+      res.json(user);
     })
     .catch((error) => {
       console.log(error);
@@ -15,44 +18,32 @@ router.get("/profile/:id", (req, res) => {
 });
 
 //user profile edit
-
-router
-  .route("/profile/:id/edit")
-  .get((req, res) => {
+router.get("/profile-edit/user/:id", isAuthenticated, (req, res) => {
     const { id } = req.params;
     User.findById(id)
-    .then((user) => {
-      res.json(user);
-    })
-    .catch((error) => {
-      console.log(error);
-    })
-  })
-  /* .post(fileUploader.single("userImg"), (req, res) => {
-    const id = req.session.currentUser._id;
-    const { username, email, password, tagLine } = req.body;
-    let userImg = undefined;
-
-    if (req.file) userImg = req.file.path;
-    User.findByIdAndUpdate(id, req.body, { userImg }, { new: true })
       .then((user) => {
-        res.redirect(`/profile/${id}`);
+        res.json(user);
       })
       .catch((error) => {
         console.log(error);
       });
-  }); */
-
-//user profile delete
-router.get("/profile/:id/delete", (req, res) => {
-  const { id } = req.params;
-  User.findByIdAndDelete(id)
-    .then((user) => {
-      res.redirect("/");
+  })
+  .put((req, res) => {
+    const { id } = req.params;
+    const { username, email, password } = req.body;
+    User.findByIdAndUpdate(id, 
+      {
+      username,
+      email,
+      password,
+      tagline,
     })
-    .catch((error) => {
-      console.log(error);
-    });
-});
+      .then((user) => {
+        res.json(user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  });
 
 module.exports = router;

@@ -37,7 +37,7 @@ router.post('/signup', (req, res, next) => {
       const { email, username, _id } = createdUser
       const user = { email, username, _id }
 
-      res.status(201).json({ user })
+      res.status(201).json({ user: user })
     })
     .catch(err => {
       console.log(err)
@@ -63,7 +63,10 @@ router.post('/login', (req, res, next) => {
         return;
       }
 
-      if (bcrypt.compareSync(password, foundUser.password)) {
+      const passwordCorrect = bcrypt.compareSync(password, foundUser.password);
+
+
+      if (passwordCorrect) {
 
         const { _id, email, username } = foundUser
 
@@ -75,7 +78,7 @@ router.post('/login', (req, res, next) => {
           { algorithm: 'HS256', expiresIn: "6h" }
         )
 
-        res.status(200).json({ authToken });
+        res.status(200).json({ authToken: authToken });
       }
       else {
         res.status(401).json({ message: "Unable to authenticate the user" });
