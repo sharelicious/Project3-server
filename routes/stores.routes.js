@@ -5,14 +5,32 @@ const Comment = require("../models/Comment.model");
 const User = require("../models/User.model");
 const mongoose = require("mongoose");
 const { isAuthenticated } = require("../middlewares/jwt.middleware");
+const { cuisineTypes } = require("../shared/cuisine-types.constants");
 
-// Retrieve all cuisine types
-router.get("/cuisine/:type", isAuthenticated, (res, req) => {
-  const { type } = req.params;
-  Store.find({ cuisineType: type })
-    .populate("products")
-    .then((stores) => {
-      res.status(201).json(stores);
+// Retrieve all cuisine types for homepage
+router.get("/cuisine-types", isAuthenticated, (req, res) => {
+  res.status(201).json({ cuisineTypes: cuisineTypes });
+});
+
+// Retrieve all friends favorite stores for homepage
+router.get("/friends-stores", isAuthenticated, (req, res) => {
+  User.findById(req.payload._id)
+    .populate({
+      path: "friends",
+      populate: {
+        path: "favoriteStores",
+      },
+    })
+    .then((user) => {
+      let uniqueStores = [];
+      user.friends.forEach((friend) => {
+        friend.favoriteStores.forEach((store) => {
+          if (!uniqueStores.includes(store)) {
+            uniqueStores.push(store);
+          }
+        });
+      });
+      res.status(201).json(uniqueStores);
     })
     .catch((err) => {
       res.status(500).json(err);
@@ -20,56 +38,27 @@ router.get("/cuisine/:type", isAuthenticated, (res, req) => {
 });
 
 // Retrieve all stores with cuisine filter
-router.get("/cuisine-results", isAuthenticated, (req, res) => {
-  Store.find()
-    .populate("products")
-    .populate("comments")
+router.get("/by-cuisine-type/:cuisineType", isAuthenticated, (req, res) => {
+  const { cuisineType } = req.params;
+  Store.find({ cuisineType: cuisineType })
     .then((stores) => {
       res.status(201).json(stores);
     })
     .catch((err) => {
       res.status(500).json(err);
     });
-  User.findById(req.payload._id) // req.payload._id is the user's id
-    .populate({
-      path: "friends",
-      populate: {
-        path: "favoriteStores",
-      },
-    })
-    .then((user) => {
-      res.status(201).json(user.friends);
-    })
-    .catch((err) => {
-      res.status(500).json(err);
-    });
 });
 
-// Retrieve all friends favorite stores
-router.get("/friends-stores", isAuthenticated, (req, res) => {
-  User.findById(req.payload._id) // req.payload._id is the user's id
-    .populate({
-      path: "friends",
-      populate: {
-        path: "favoriteStores",
-      },
-    })
-    .then((user) => {
-      res.status(201).json(user.friends);
-    })
-    .catch((err) => {
-      res.status(500).json(err);
-    });
-});
-
-// Retrieve store selected by user
-router.get("/store-details/:storeId", isAuthenticated, (req, res) => {
-  Store.findById(req.payload._id)
-    .populate("products")
+// Retrieve store by id
+router.get("/:storeId", isAuthenticated, (req, res) => {
+  const { storeId } = req.params;
+  Store.findById(storeId)
     .populate("comments")
+    .populate("products")
+    .populate("storeLikes")
     .populate("deliveryOptions")
-    .then((store) => {
-      res.status(201).json(store);
+    .then((stores) => {
+      res.status(201).json(stores);
     })
     .catch((err) => {
       res.status(500).json(err);

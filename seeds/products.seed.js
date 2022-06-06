@@ -89,7 +89,7 @@ const products = [
     productName: "Classic Burger",
     productDescription: "Smashed 1/4 lb. Chuck patty. Topped with American cheese, holy sauce, lettuce, tomato, and onion.",
     cuisineType: "Burgers",
-    productPrice: "",
+    productPrice: "$13.00",
   },
   {
     _id: "6298896154d5be7c0ef07962",
@@ -602,7 +602,7 @@ const products = [
     productDescription: "Live lobster mango avocado cucumber and shiso leaves and soy paper. And with mango sauce.",
     cuisineType: "Sushi",
     productPrice: "$19.00",
-  },
+  }
 ];
 
 Product.deleteMany().then(() => {
