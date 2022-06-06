@@ -10,6 +10,7 @@ router.use("/store", require('./stores.routes'))
 router.use("/user", require('./user.routes'))
 router.use("/upload", require('./upload.routes'))
 router.use("/profile", require('./profile.routes'))
+router.use("/like", require('./likes.routes'))
 
 
 module.exports = router

@@ -7,14 +7,13 @@ const mongoose = require("mongoose");
 const { isAuthenticated } = require("../middlewares/jwt.middleware");
 const { cuisineTypes } = require("../shared/cuisine-types.constants");
 
-// Retrieve all cuisine types
+// Retrieve all cuisine types for homepage
 router.get("/cuisine-types", isAuthenticated, (req, res) => {
   res.status(201).json({ cuisineTypes: cuisineTypes });
 });
 
-// Retrieve all friends favorite stores
+// Retrieve all friends favorite stores for homepage
 router.get("/friends-stores", isAuthenticated, (req, res) => {
-  console.log(req.payload);
   User.findById(req.payload._id)
     .populate({
       path: "friends",
@@ -30,7 +29,7 @@ router.get("/friends-stores", isAuthenticated, (req, res) => {
             uniqueStores.push(store);
           }
         });
-      })
+      });
       res.status(201).json(uniqueStores);
     })
     .catch((err) => {
