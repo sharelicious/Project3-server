@@ -12,10 +12,11 @@ router.get("/user/friends", (req, res) => {
 });
 
 //Retrieve all users
-router.get("/user/search/users", isAuthenticated, (req, res) => {
+router.get("/user/search/users", (req, res) => {
   User.find() 
     .populate("friends")
     .then((friends) => {
+      console.log("These are the friends", friends)
       res.json(friends);
     })
     .catch((err) => res.status(500).json(err));
