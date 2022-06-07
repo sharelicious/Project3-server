@@ -2,7 +2,7 @@ const router = require("./user.routes");
 const User = require('../models/User.model')
 
 // user profile
-router.get("/profile/:id", (req, res) => {
+router.get("/:id", (req, res) => {
   const { id } = req.params;
   
   User.findById(id)
@@ -44,7 +44,7 @@ router
   }); */
 
 //user profile delete
-router.get("/profile/:id/delete", (req, res) => {
+router.get("/:id/delete", (req, res) => {
   const { id } = req.params;
   User.findByIdAndDelete(id)
     .then((user) => {
