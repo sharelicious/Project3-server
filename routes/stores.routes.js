@@ -54,7 +54,12 @@ router.get("/:storeId", isAuthenticated, (req, res) => {
   const { storeId } = req.params;
   
   Store.findById(storeId)
-    .populate("comments")
+    .populate({
+      path: "comments",
+      populate: {
+        path: "owner",
+      },
+    })
     .populate("products")
     .populate("storeLikes")
     .populate("deliveryOptions")
