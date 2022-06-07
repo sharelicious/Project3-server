@@ -1,5 +1,6 @@
 const router = require("./user.routes");
 const User = require('../models/User.model')
+const uploader = require('../config/cloudinary.config')
 
 // user profile
 router.get("/:id", (req, res) => {
@@ -30,13 +31,11 @@ router
     })
 })
 .post(uploader.single("userImg"),(req, res) => {	
-  const { id, username, tagLine, email, userImg} = req.body;
-
+  const { id } = req.params;
 	let imageUrl = undefined
 	if(req.file) imageUrl = req.file.path
 
-	User.findByIdAndUpdate(id, {
-    username, tagLine, email , userImg})
+	User.findByIdAndUpdate(id, req.body, {new: true})
 	.then((user) => {
     res.json(user);
   })
