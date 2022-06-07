@@ -11,6 +11,7 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: [true, "password is mandatory"],
+    select: false
   },
   username: {
     type: String,
@@ -35,18 +36,11 @@ const userSchema = new Schema({
       maxlength: 100,
     },
   ],
-  comments: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Comment",
-      maxlength: 280,
-    },
-  ],
   userImg: {
     type: String,
     default:
       "https://i.ibb.co/hDK8Qvr/default-avatar-300x300-1.jpg",
   },
 });
-
-module.exports = model("User", userSchema);
+const User = model("User", userSchema);
+module.exports = User;

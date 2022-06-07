@@ -7,8 +7,7 @@ const productSchema = new Schema({
   },
   productDescription: {
     type: String,
-    required: true,
-    minlength: 20,
+    required: true
   },
   productImg: {
     type: String,

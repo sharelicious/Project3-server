@@ -11,6 +11,7 @@ const PostmatesLink= Postmates.link("https://www.postmates.com/")
 
 const stores = [
   {
+    _id: "6298834354d5be7c0ef07555",
     storeImg: "https://img.cdn4dd.com/cdn-cgi/image/fit=cover,width=1000,height=300,format=auto,quality=80/https://doordash-static.s3.amazonaws.com/media/store/header/910f2db2-c57d-4098-b73d-93656199fa4e.jpg",
     storeName: "Shake Shack",
     storeAddress: ("20 3rd Avenue").link("https://goo.gl/maps/k8wRyxfiS2RFnFK66"),
@@ -19,9 +20,12 @@ const stores = [
     priceRange: "$",
     cuisineType: "Burgers",
     products: ["6298834354d5be7c0ef07956", "6298834b54d5be7c0ef07957", "6298835054d5be7c0ef07958", "6298835354d5be7c0ef07959", "6298835754d5be7c0ef0795a"],
-    deliveryOptions: [DoorDashLink]
+    deliveryOptions: [DoorDashLink],
+    storeLikes: ["6298834354d5be7c0ef07999"],
+    comments: ["6298834354d5be7c0ef07888"],
   },
   {
+    _id: "6298834354d5be7c0ef07556",
     storeImg: "https://img.cdn4dd.com/cdn-cgi/image/fit=cover,width=1000,height=300,format=auto,quality=80/https://doordash-static.s3.amazonaws.com/media/store/header/5fac858d-6717-4790-93b8-69b4d645ac9c.jpeg",
     storeName: "Bronson's Burgers",
     storeAddress: ("250 Mulberry Street").link("https://goo.gl/maps/gZzrA4gFzvaKkMMZ6"),

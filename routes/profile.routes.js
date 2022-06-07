@@ -1,16 +1,13 @@
-const express = require("express");
-const router = express.Router();
-const User = require("../models/User.model");
-const { isAuthenticated } = require("../middlewares/jwt.middleware");
-const uploadCloud = require("../config/cloudinary.config"); // for editing profile picture
+const router = require("./user.routes");
+const User = require('../models/User.model')
 
 // user profile
-router.get("/profile/user/:id", isAuthenticated, (req, res) => {
-  const { _id } = req.params;
-
-  User.findById(_id)
+router.get("/profile/:id", (req, res) => {
+  const { id } = req.params;
+  
+  User.findById(id)
     .then((user) => {
-      res.json(user);
+      res.json(user)
     })
     .catch((error) => {
       console.log(error);
@@ -18,32 +15,44 @@ router.get("/profile/user/:id", isAuthenticated, (req, res) => {
 });
 
 //user profile edit
-router.get("/profile-edit/user/:id", isAuthenticated, (req, res) => {
+
+router
+  .route("/profile-edit/:id")
+  .get((req, res) => {
     const { id } = req.params;
     User.findById(id)
-      .then((user) => {
-        res.json(user);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  })
-  .put((req, res) => {
-    const { id } = req.params;
-    const { username, email, password } = req.body;
-    User.findByIdAndUpdate(id, 
-      {
-      username,
-      email,
-      password,
-      tagline,
+    .then((user) => {
+      res.json(user);
     })
+    .catch((error) => {
+      console.log(error);
+    })
+  })
+  /* .post(fileUploader.single("userImg"), (req, res) => {
+    const id = req.session.currentUser._id;
+    const { username, email, password, tagLine } = req.body;
+    let userImg = undefined;
+
+    if (req.file) userImg = req.file.path;
+    User.findByIdAndUpdate(id, req.body, { userImg }, { new: true })
       .then((user) => {
-        res.json(user);
+        res.redirect(`/profile/${id}`);
       })
       .catch((error) => {
         console.log(error);
       });
-  });
+  }); */
+
+//user profile delete
+router.get("/profile/:id/delete", (req, res) => {
+  const { id } = req.params;
+  User.findByIdAndDelete(id)
+    .then((user) => {
+      res.redirect("/");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
 
 module.exports = router;

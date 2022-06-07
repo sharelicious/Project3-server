@@ -34,9 +34,18 @@ router.post('/signup', (req, res, next) => {
     })
     .then((createdUser) => {
       console.log('----', createdUser)
-      const { username, email, password, favoriteStores, friends, tagLine, comments, userImg  } = createdUser
+      const { _id, username, email, password, favoriteStores, friends, tagLine, comments, userImg  } = createdUser
       const user = { username, email, password, favoriteStores, friends, tagLine, comments, userImg }
-      res.status(201).json({ user })
+
+      const payload = { _id, email, username }
+
+      const authToken = jwt.sign(
+        payload,
+        process.env.TOKEN_SECRET,
+        { algorithm: 'HS256', expiresIn: "6h" }
+      )
+
+      res.status(201).json({ authToken });
     })
     .catch(err => {
       console.log(err)
@@ -45,7 +54,7 @@ router.post('/signup', (req, res, next) => {
 })
 
 router.post('/login', (req, res, next) => {
-
+  console.log(req.body);
   const { email, password } = req.body
 
   if (email === '' || password === '') {
@@ -55,6 +64,7 @@ router.post('/login', (req, res, next) => {
 
   User
     .findOne({ email })
+    .select('+password')
     .then((foundUser) => {
 
       if (!foundUser) {
@@ -91,7 +101,6 @@ router.post('/login', (req, res, next) => {
 
   // no devuelve el token
 router.get('/verify', isAuthenticated, (req, res, next) => {
-
   setTimeout(() => {
     res.status(200).json(req.payload)
   }, 3000)
