@@ -11,17 +11,6 @@ router.get("/friends", isAuthenticated, (req, res) => {
     .catch((err) => res.status(500).json({ message: "Internal Server Error" }));
 });
 
-/* router.get("/friends", isAuthenticated, (req, res) => {
-  User.findById(req.user._id)
-    .populate("friends")
-    .then((user) => {
-      res.json(user.friends);
-    })
-    .catch((err) => {
-      res.status(500).json({ message: "Internal Server Error" });
-    });
-}); */
-
 //Retrieve all users
 router.get("/search/users", (req, res) => {
   User.find()
