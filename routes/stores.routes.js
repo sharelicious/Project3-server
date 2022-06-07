@@ -52,6 +52,7 @@ router.get("/by-cuisine-type/:cuisineType", isAuthenticated, (req, res) => {
 // Retrieve store by id
 router.get("/:storeId", isAuthenticated, (req, res) => {
   const { storeId } = req.params;
+  
   Store.findById(storeId)
     .populate("comments")
     .populate("products")
