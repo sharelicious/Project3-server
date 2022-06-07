@@ -1,29 +1,29 @@
- const { isAuthenticated } = require("../middlewares/jwt.middleware");
+const { isAuthenticated } = require("../middlewares/jwt.middleware");
 const mongoose = require("mongoose");
 const router = require("express").Router();
 const User = require("../models/User.model");
 
 //Retrieve all friends
-router.get("/user/friends", (req, res) => {
+router.get("/friends", isAuthenticated, (req, res) => {
   User.findById(req.payload._id)
     .populate("friends")
-    .then(user => res.json(user.friends))
-    .catch(err => res.status(500).json(err));
+    .then((user) => res.json(user.friends))
+    .catch((err) => res.status(500).json({ message: "Internal Server Error" }));
 });
 
 //Retrieve all users
-router.get("/user/search/users", (req, res) => {
-  User.find() 
+router.get("/search/users", (req, res) => {
+  User.find()
     .populate("friends")
-    .then((friends) => {
-      console.log("These are the friends", friends)
-      res.json(friends);
+    .then((users) => {
+      console.log("These are the users", users);
+      res.json(users);
     })
     .catch((err) => res.status(500).json(err));
 });
 
 //following friends
-router.get("/user/follow/:friendId", isAuthenticated, (req, res) => {
+router.post("/follow/:friendId", isAuthenticated, (req, res) => {
   User.findById(req.payload._id)
     .then((loggedInUser) => {
       loggedInUser.friends.push(req.params.friendId);
@@ -38,7 +38,7 @@ router.get("/user/follow/:friendId", isAuthenticated, (req, res) => {
 });
 
 //unfollowing friends
-router.get("/user/unfollow/:friendId", isAuthenticated, (req, res) => {
+router.post("/unfollow/:friendId", isAuthenticated, (req, res) => {
   User.findById(req.payload._id)
     .then((loggedInUser) => {
       const friendIndex = loggedInUser.friends.indexOf(req.params.friendId);
@@ -54,16 +54,32 @@ router.get("/user/unfollow/:friendId", isAuthenticated, (req, res) => {
 });
 
 //check if the users are following each other
-router.get("/user/checkfollowing/:friendId", isAuthenticated, (req, res) => {
+router.get("/checkfollowing/:friendId", isAuthenticated, (req, res) => {
   User.findById(req.payload._id)
     .then((loggedInUser) => {
       const isFollowing = loggedInUser.friends.includes(req.params.friendId);
       res.json(isFollowing);
     })
     .catch((err) => {
-      console.log("Unable to find friends", err);
       res.redirect("/friends");
+      console.log("Unable to find friends", err);
     });
 });
 
 module.exports = router;
+
+/* router.get("/checkfollowing/:friendId", isAuthenticated, (req, res) => {
+  User.findById(req.payload._id)
+    .then((loggedInUser) => {
+      const friendIndex = loggedInUser.friends.indexOf(req.params.friendId);
+      if (friendIndex === -1) {
+        res.json(false);
+      } else {
+        res.json(true);
+      }
+    })
+    .catch((err) => {
+      console.log("Unable to find friends", err);
+      res.redirect("/friends");
+    });
+}); */
