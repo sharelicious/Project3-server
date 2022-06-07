@@ -32,19 +32,20 @@ const userSchema = new Schema({
   tagLine: [
     {
       type: String,
-      maxlength: 280,
+      maxlength: 100,
     },
   ],
   comments: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Comments",
+      ref: "Comment",
+      maxlength: 280,
     },
   ],
   userImg: {
     type: String,
     default:
-      "https://simulacionymedicina.es/wp-content/uploads/2015/11/default-avatar-300x300-1.jpg",
+      "https://i.ibb.co/hDK8Qvr/default-avatar-300x300-1.jpg",
   },
 });
 
