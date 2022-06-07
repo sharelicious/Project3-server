@@ -17,22 +17,55 @@ router.get("/profile/:id", (req, res) => {
 });
 
 //user profile edit
-
 router
+.route("/profile/:id/edit")
+.get((req, res) => {
+
+    User.findById(req.payload._id)
+    .then((user) =>{
+        res.json(user, {
+          username: user.username, 
+          email: user.email, 
+          tagLine: user.tagLine,
+          userImg: user.userImg
+        })
+    })
+})
+.post(uploader.single("userImg"),(req, res) => {	
+  const { id, username, tagLine, email, userImg} = req.body;
+
+	let imageUrl = undefined
+	if(req.file) imageUrl = req.file.path
+
+	User.findByIdAndUpdate(id, {
+    username, tagLine, email , userImg})
+	.then((user) => {
+    res.json(user);
+  })
+  .catch((error) => {
+    console.log(error);
+  })
+})
+
+
+
+/* 
+router
+
   .post("/profile/:id/edit",(req, res) => {
     const { id } = req.params;
      User.findByIdAndUpdate(id,{
        username: req.body.username,
        tagLine: req.body.tagLine,
-      email: req.body.email},/*  { userImg } */ { new: true }) 
-     console.log(req.body)
+      email: req.body.email},/*  { userImg } { new: true }) 
+     console.log("This is the req body",req.body)
     .then((user) => {
       res.json(user);
     })
     .catch((error) => {
       console.log(error);
     })
-  })
+  }) */
 
   /* .post(uploader.single("userImg"), (req, res) => {
     const id = req.payload._id;

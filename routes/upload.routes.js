@@ -13,5 +13,13 @@ router.post('/image', uploader.single('imageData'), (req, res) => {
 })
 
 
+router.get('/image', (req, res) => {
+
+    res.status(200).json({ hola:'hola' })
+})
+
+
+
+
 
 module.exports = router
