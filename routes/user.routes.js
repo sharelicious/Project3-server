@@ -1,4 +1,4 @@
- const { isAuthenticated } = require("../middlewares/jwt.middleware");
+const { isAuthenticated } = require("../middlewares/jwt.middleware");
 const mongoose = require("mongoose");
 const router = require("express").Router();
 const User = require("../models/User.model");
@@ -7,16 +7,16 @@ const User = require("../models/User.model");
 router.get("/friends", isAuthenticated, (req, res) => {
   User.findById(req.payload._id)
     .populate("friends")
-    .then(user => res.json(user.friends))
-    .catch(err => res.status(500).json(err));
+    .then((user) => res.json(user.friends))
+    .catch((err) => res.status(500).json({ message: "Internal Server Error" }));
 });
 
 //Retrieve all users
 router.get("/search/users", (req, res) => {
-  User.find() 
+  User.find()
     .populate("friends")
     .then((users) => {
-      console.log("These are the users", users)
+      console.log("These are the users", users);
       res.json(users);
     })
     .catch((err) => res.status(500).json(err));
@@ -61,9 +61,25 @@ router.get("/checkfollowing/:friendId", isAuthenticated, (req, res) => {
       res.json(isFollowing);
     })
     .catch((err) => {
-      console.log("Unable to find friends", err);
       res.redirect("/friends");
+      console.log("Unable to find friends", err);
     });
 });
 
 module.exports = router;
+
+/* router.get("/checkfollowing/:friendId", isAuthenticated, (req, res) => {
+  User.findById(req.payload._id)
+    .then((loggedInUser) => {
+      const friendIndex = loggedInUser.friends.indexOf(req.params.friendId);
+      if (friendIndex === -1) {
+        res.json(false);
+      } else {
+        res.json(true);
+      }
+    })
+    .catch((err) => {
+      console.log("Unable to find friends", err);
+      res.redirect("/friends");
+    });
+}); */
