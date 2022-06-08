@@ -6,14 +6,15 @@ const Store = require("../models/Store.model");
 
 //actions on like button
 router
-.post("/:storeId/like", (req, res) => {
-    const { id } = req.params;
-    Store.findByIdAndUpdate(id, {$push: { storeLikes: req.payload._id }})
-    .then((updatedStore) => {
-        User.findByIdAndUpdate(req.payload._id, {$push: { favoriteStores: updatedStore._id}})})
-        .then((__) => {
-            res.status(201).json('liked correctly!')
+.post("/:storeId", isAuthenticated, (req, res) => {
+    const id  = req.params.storeId;
+    User.findByIdAndUpdate(req.payload._id, {$push: { favoriteStores: id}})
+    .then((user) => {
+        Store.findByIdAndUpdate(id, {$push: { storeLikes: req.payload._id }}, {new: true})
+        .then((store) => {
+            res.status(201).json(store.storeLikes)
         })
+    })
     .catch((err) => {
         res.status(500).json(err);
     })
