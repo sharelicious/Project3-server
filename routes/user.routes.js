@@ -67,19 +67,3 @@ router.get("/checkfollowing/:friendId", isAuthenticated, (req, res) => {
 });
 
 module.exports = router;
-
-/* router.get("/checkfollowing/:friendId", isAuthenticated, (req, res) => {
-  User.findById(req.payload._id)
-    .then((loggedInUser) => {
-      const friendIndex = loggedInUser.friends.indexOf(req.params.friendId);
-      if (friendIndex === -1) {
-        res.json(false);
-      } else {
-        res.json(true);
-      }
-    })
-    .catch((err) => {
-      console.log("Unable to find friends", err);
-      res.redirect("/friends");
-    });
-}); */
