@@ -7,6 +7,7 @@ router.get("/:id", (req, res) => {
   const { id } = req.params;
   
   User.findById(id)
+  .populate('favoriteStores')
     .then((user) => {
       res.json(user)
     })
