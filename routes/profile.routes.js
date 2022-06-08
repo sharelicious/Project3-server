@@ -1,6 +1,7 @@
 const router = require("./user.routes");
 const User = require('../models/User.model')
-const uploader = require('../config/cloudinary.config')
+const uploader = require('../config/cloudinary.config');
+const { get } = require("express/lib/response");
 
 // user profile
 router.get("/:id", (req, res) => {
@@ -56,5 +57,4 @@ router.get("/:id/delete", (req, res) => {
       console.log(error);
     });
 });
-
 module.exports = router;

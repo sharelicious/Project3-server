@@ -32,5 +32,39 @@ router
     .catch((err) => console.log(err))
 })
 
+//See all friend's favourites restaurants
+router.get("/friendsStores", isAuthenticated, (req, res) => {
+    
+    User.findById(req.payload._id)
+      .populate({
+        path: "friends",
+        populate: {
+          path: "favoriteStores",
+        }
+      })
+      .then((user) => {
+        const friendsLikesArr = [];
+
+        user.friends.forEach((friend) => {
+
+            if(friend.favoriteStores.length > 0) {
+                const randomIndex = Math.floor(Math.random() * friend.favoriteStores.length);
+                const newItem = {
+                    friend: friend, 
+                    store: friend.favoriteStores[randomIndex]
+                }
+
+                friendsLikesArr.push(newItem);
+            }
+        })
+
+        res.status(201).json(friendsLikesArr);
+      })
+      .catch((err) => {
+        res.status(500).json(err);
+      });
+  });
+
 module.exports = router
+
 
