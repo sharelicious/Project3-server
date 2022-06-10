@@ -139,7 +139,7 @@ const stores = [
   {
     storeImg: "https://img.cdn4dd.com/cdn-cgi/image/fit=cover,width=1000,height=300,format=auto,quality=80/https://doordash-static.s3.amazonaws.com/media/store/header/4cde790a-9a6e-484b-90f8-c8ee1dce03e9.jpg",
     storeName: "DOMODOMO New York",
-    storeAddress: ("140 West Houston Street").link("https://www.google.com/maps/place/DOMODOMO+New+York/@40.7280131,-74.0038065,17z/data=!4m5!3m4!1s0x89c2598df63aab29:0xb9d2ca4867a64bcd!8m2!3d40.7280131!4d-74.0016178"),
+    storeAddress: "https://www.google.com/maps/place/DOMODOMO+New+York/@40.7280131,-74.0038065,17z/data=!4m5!3m4!1s0x89c2598df63aab29:0xb9d2ca4867a64bcd!8m2!3d40.7280131!4d-74.0016178",
     storePhone: "tel:+16467070301",
     deliveryTime: "15-30 min",
     priceRange: "$$$",
