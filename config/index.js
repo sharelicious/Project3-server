@@ -7,10 +7,10 @@ module.exports = (app) => {
   app.set("trust proxy", 1);
 
   app.use(
-    cors({
+    cors(/* {
       credentials: true,
       origin: process.env.ORIGIN,
-    })
+    } */)
   );
 
   app.use(logger("dev"));
