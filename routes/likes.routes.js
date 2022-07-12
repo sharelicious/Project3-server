@@ -19,8 +19,8 @@ router.post("/:storeId", isAuthenticated, (req, res) => {
             res.status(201).json(store.storeLikes);
           });
         })
-        .catch((err) => {
-          res.status(500).json(err);
+        .catch((error) => {
+          res.status(500).json(error);
         });
     }
   });
@@ -34,7 +34,7 @@ router.get("/:storeId/like/:userId", (req, res) => {
       const reverseLikes = user.favoriteStores.reverse();
       res.status(200).json(reverseLikes);
     })
-    .catch((err) => console.log(err));
+    .catch((error) => console.log(error));
 });
 
 //See all friend's favourites restaurants
@@ -65,8 +65,8 @@ router.get("/friendsStores", isAuthenticated, (req, res) => {
 
       res.status(201).json(friendsLikesArr);
     })
-    .catch((err) => {
-      res.status(500).json(err);
+    .catch((error) => {
+      res.status(500).json(error);
     });
 });
 
