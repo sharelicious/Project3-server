@@ -32,8 +32,8 @@ router.get("/friends-stores", isAuthenticated, (req, res) => {
       });
       res.status(201).json(uniqueStores);
     })
-    .catch((err) => {
-      res.status(500).json(err);
+    .catch((error) => {
+      res.status(500).json(error);
     });
 });
 
@@ -44,15 +44,15 @@ router.get("/by-cuisine-type/:cuisineType", isAuthenticated, (req, res) => {
     .then((stores) => {
       res.status(201).json(stores);
     })
-    .catch((err) => {
-      res.status(500).json(err);
+    .catch((error) => {
+      res.status(500).json(error);
     });
 });
 
 // Retrieve store by id
 router.get("/:storeId", isAuthenticated, (req, res) => {
   const { storeId } = req.params;
-  
+
   Store.findById(storeId)
     .populate({
       path: "comments",
@@ -66,9 +66,11 @@ router.get("/:storeId", isAuthenticated, (req, res) => {
     .then((stores) => {
       res.status(201).json(stores);
     })
-    .catch((err) => {
-      res.status(500).json(err);
+    .catch((error) => {
+      res.status(500).json(error);
     });
 });
+
+//comments
 
 module.exports = router;

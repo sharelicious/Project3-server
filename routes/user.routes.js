@@ -8,7 +8,9 @@ router.get("/friends", isAuthenticated, (req, res) => {
   User.findById(req.payload._id)
     .populate("friends")
     .then((user) => res.json(user.friends))
-    .catch((err) => res.status(500).json({ message: "Internal Server Error" }));
+    .catch((error) =>
+      res.status(500).json({ message: "Internal Server Error", error })
+    );
 });
 
 //Retrieve all users
@@ -16,10 +18,9 @@ router.get("/search/users", (req, res) => {
   User.find()
     .populate("friends")
     .then((users) => {
-      console.log("These are the users", users);
       res.json(users);
     })
-    .catch((err) => res.status(500).json(err));
+    .catch((error) => res.status(500).json(error));
 });
 
 //following friends
@@ -28,11 +29,11 @@ router.post("/follow/:friendId", isAuthenticated, (req, res) => {
     .then((loggedInUser) => {
       loggedInUser.friends.push(req.params.friendId);
       loggedInUser
-        .save() //db
+        .save()
         .then((loggedInUser) => res.json(loggedInUser.friends));
     })
-    .catch((err) => {
-      console.log("UnablerequestProperty: 'payload' to find friends", err);
+    .catch((error) => {
+      console.log("UnablerequestProperty: 'payload' to find friends", error);
       res.redirect("/friends");
     });
 });
@@ -44,11 +45,11 @@ router.post("/unfollow/:friendId", isAuthenticated, (req, res) => {
       const friendIndex = loggedInUser.friends.indexOf(req.params.friendId);
       loggedInUser.friends.splice(friendIndex, 1);
       loggedInUser
-        .save() //db
+        .save()
         .then((loggedInUser) => res.json(loggedInUser.friends));
     })
-    .catch((err) => {
-      console.log("Unable to find friends", err);
+    .catch((error) => {
+      console.log("Unable to find friends", error);
       res.redirect("/friends");
     });
 });
@@ -60,9 +61,9 @@ router.get("/checkfollowing/:friendId", isAuthenticated, (req, res) => {
       const isFollowing = loggedInUser.friends.includes(req.params.friendId);
       res.json(isFollowing);
     })
-    .catch((err) => {
+    .catch((error) => {
       res.redirect("/friends");
-      console.log("Unable to find friends", err);
+      console.log("Unable to find friends", error);
     });
 });
 

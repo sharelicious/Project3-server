@@ -6,9 +6,8 @@ const comments = [
   {
     _id: "6298834354d5be7c0ef07888",
     owner: "6298834354d5be7c0ef07999",
-    message: "Ta rica la burga pa",
+    message: "These burguers are the best I've eaten in years",
   },
-  
 ];
 
 Comment.deleteMany().then(() => {
@@ -17,7 +16,7 @@ Comment.deleteMany().then(() => {
       console.log("Created", commentFromDb.length, "comments");
       mongoose.connection.close();
     })
-    .catch((err) =>
-      console.log(`An error occurred while creating comments: ${err}`)
+    .catch((error) =>
+      console.log(`An error occurred while creating comments: ${error}`)
     );
 });
