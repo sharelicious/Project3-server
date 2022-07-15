@@ -50,10 +50,13 @@ router.get("/by-cuisine-type/:cuisineType", isAuthenticated, (req, res) => {
 });
 
 // Retrieve store by id
-router.get("/:storeId", isAuthenticated, (req, res) => {
+router
+.route("/:storeId")
+.get(isAuthenticated, (req, res) => {
   const { storeId } = req.params;
 
   Store.findById(storeId)
+    .populate("comments")
     .populate({
       path: "comments",
       populate: {
@@ -69,8 +72,32 @@ router.get("/:storeId", isAuthenticated, (req, res) => {
     .catch((error) => {
       res.status(500).json(error);
     });
-});
+})
+.post((req, res) => {
+  const { storeId } = req.params;
+  const { message } = req.body;
 
-//comments
+  Comment.create({ 
+    owner: req.payload._id, 
+    message
+  })
+  .then((newComment) => {
+    console.log(newComment)
+
+    Store.findByIdAndUpdate(id, {
+      $push: {comments: newComment._id},
+    })
+    .then((updatedStore) => {
+      console.log("UPDATED STORE", updatedStore);
+      res.status(201).json(updatedStore)
+    })
+    .catch((error) => {
+      res.status(500).json(error);
+    })
+  })
+  .catch((error) => {
+    res.status(500).json(error);
+})
+});
 
 module.exports = router;
