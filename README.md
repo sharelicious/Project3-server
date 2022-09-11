@@ -119,11 +119,11 @@ owner: [{type: Schema.Types.ObjectId,ref:'Users'}]
 
 [Repository Link](https://github.com/sharelicious/sharelicious)
 
-[Deploy Link](https://sharelicious.herokuapp.com/)
+[Deploy Link](https://ironhack-sharelicious-client.herokuapp.com/)
 
 ### Slides
 
-[Link](https://slides.com/pablodellacassa/sharelicious/) 
+[Link](https://slides.com/samyalisanchez) 
 
 ### Contributors
 
